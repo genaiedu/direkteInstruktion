@@ -5,13 +5,241 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Direkte Instruktion | Das evidenzbasierte Fundament moderner Pädagogik</title>
   <meta name="description" content="Eine ockerfarbene Webseite zur Direkten Instruktion als evidenzbasiertem Fundament moderner, agiler Pädagogik: Geschichte, Evidenz, Cognitive Load Theory und Unterrichtsarchitektur.">
+  <style>
+    /* ===== MASTERPROMPT-SEKTION ===== */
+    #masterprompt { background: transparent; }
+
+    .mp-wrapper {
+      background: rgba(240,194,91,0.10);
+      border: 1.5px solid rgba(240,194,91,0.35);
+      border-radius: 18px;
+      padding: 2.4rem 2.8rem;
+      margin-top: 1.6rem;
+    }
+
+    .mp-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap;
+    }
+
+    .mp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(240,194,91,0.18);
+      border: 1px solid rgba(240,194,91,0.5);
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #bd8615;
+    }
+
+    .mp-badge .dot {
+      width: 7px; height: 7px;
+      background: #f0c25b;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .mp-hint {
+      font-size: 0.85rem;
+      color: #8a7040;
+      line-height: 1.5;
+    }
+
+    .mp-hint strong { color: #bd8615; }
+
+    .mp-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .mp-step {
+      background: rgba(240,194,91,0.08);
+      border-left: 3px solid #f0c25b;
+      border-radius: 0 10px 10px 0;
+      padding: 0.7rem 1rem;
+    }
+
+    .mp-step .sn {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #bd8615;
+      margin-bottom: 0.2rem;
+    }
+
+    .mp-step p {
+      font-size: 0.82rem;
+      color: #5a4a20;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .mp-box-wrap {
+      position: relative;
+    }
+
+    .mp-prompt {
+      background: #1f2427;
+      color: #e8dfc4;
+      border-radius: 12px;
+      padding: 1.6rem 1.8rem;
+      font-family: 'Courier New', 'Lucida Console', monospace;
+      font-size: 0.84rem;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 540px;
+      overflow-y: auto;
+      border: 1.5px solid rgba(240,194,91,0.25);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.28);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(240,194,91,0.4) transparent;
+      user-select: text;
+    }
+
+    .mp-prompt::-webkit-scrollbar { width: 6px; }
+    .mp-prompt::-webkit-scrollbar-track { background: transparent; }
+    .mp-prompt::-webkit-scrollbar-thumb {
+      background: rgba(240,194,91,0.4);
+      border-radius: 3px;
+    }
+
+    /* Hervorhebungen im Prompt-Text */
+    .mp-prompt .kw  { color: #f0c25b; font-weight: 700; }
+    .mp-prompt .sec { color: #7ec8a4; font-weight: 700; }
+    .mp-prompt .cmt { color: #8a9aaa; font-style: italic; }
+    .mp-prompt .var { color: #c792ea; }
+    .mp-prompt .str { color: #f78c6c; }
+
+    .mp-copy-btn {
+      position: absolute;
+      top: 0.9rem;
+      right: 0.9rem;
+      background: rgba(240,194,91,0.18);
+      border: 1px solid rgba(240,194,91,0.5);
+      color: #f0c25b;
+      border-radius: 8px;
+      padding: 0.4rem 0.95rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      font-family: inherit;
+    }
+
+    .mp-copy-btn:hover {
+      background: rgba(240,194,91,0.32);
+      color: #fff8e0;
+    }
+
+    .mp-copy-btn.copied {
+      background: rgba(126,200,164,0.25);
+      border-color: rgba(126,200,164,0.6);
+      color: #7ec8a4;
+    }
+
+    .mp-where {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .mp-where span {
+      font-size: 0.8rem;
+      color: #8a7040;
+      font-weight: 600;
+    }
+
+    .mp-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(240,194,91,0.13);
+      border: 1px solid rgba(240,194,91,0.4);
+      border-radius: 999px;
+      padding: 0.28rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #bd8615;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .mp-link:hover { background: rgba(240,194,91,0.28); }
+
+    .mp-link .arrow { font-size: 0.9rem; }
+
+    /* Ergebnis-Hinweis-Box */
+    .mp-result-hint {
+      margin-top: 1.4rem;
+      background: rgba(126,200,164,0.10);
+      border: 1px solid rgba(126,200,164,0.35);
+      border-radius: 12px;
+      padding: 1rem 1.3rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.8rem;
+      align-items: start;
+    }
+
+    .mp-result-hint .icon {
+      font-size: 1.5rem;
+      line-height: 1;
+      padding-top: 0.1rem;
+    }
+
+    .mp-result-hint h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #3a7a5c;
+    }
+
+    .mp-result-hint p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #4a6a58;
+      line-height: 1.5;
+    }
+
+    .mp-latex-preview {
+      margin-top: 1rem;
+      background: #1f2427;
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: #c5d0d8;
+      line-height: 1.65;
+      border: 1px solid rgba(126,200,164,0.25);
+    }
+
+    .mp-latex-preview .lx-kw  { color: #f0c25b; }
+    .mp-latex-preview .lx-env { color: #7ec8a4; }
+    .mp-latex-preview .lx-cmt { color: #607080; font-style: italic; }
+    .mp-latex-preview .lx-arg { color: #c792ea; }
+  </style>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
   <div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div><div class="bg-orb bg-orb-3"></div><div class="bg-grid"></div><div class="particles" id="particles" aria-hidden="true"></div>
   <svg class="thought-line" id="thoughtLine" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 60 1000"><defs><linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0c25b" stop-opacity="0.95"/><stop offset="50%" stop-color="#bd8615" stop-opacity="0.85"/><stop offset="100%" stop-color="#8f640c" stop-opacity="0.55"/></linearGradient><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path id="lineBg" d="M 30 0 Q 18 250, 30 500 T 30 1000" stroke="rgba(31,36,39,0.08)" stroke-width="1.5" fill="none"/><path id="lineActive" d="M 30 0 Q 18 250, 30 500 T 30 1000" stroke="url(#lineGrad)" stroke-width="2" fill="none" filter="url(#glow)" stroke-linecap="round"/><g id="lineNodes"></g></svg>
-  <aside class="sidebar panel" id="sidebar" aria-label="Seiteninhalt"><div class="sidebar-head"><div><p class="eyebrow">Navigation</p><h2>Inhalt</h2></div><button class="icon-button" id="closeSidebar" aria-label="Sidebar schließen">×</button></div><nav><a href="#top" data-section="top"><span>Start</span></a><a href="#idee" data-section="idee"><span>Grundidee</span></a><a href="#saeulen" data-section="saeulen"><span>Fünf Säulen</span></a><a href="#bigdi" data-section="bigdi"><span>Big DI</span></a><a href="#evidenz" data-section="evidenz"><span>Evidenz</span></a><a href="#clt" data-section="clt"><span>Cognitive Load</span></a><a href="#abgrenzung" data-section="abgrenzung"><span>Abgrenzung</span></a><a href="#phasen" data-section="phasen"><span>Sieben Phasen</span></a><a href="#kooperation" data-section="kooperation"><span>Kooperation</span></a><a href="#domaene" data-section="domaene"><span>Domänen</span></a><a href="#fazit" data-section="fazit"><span>Fazit</span></a><a href="#folien" data-section="folien"><span>Folien</span></a><a href="#impressum" data-section="impressum"><span>Impressum</span></a><a href="#datenschutz" data-section="datenschutz"><span>Datenschutz</span></a></nav><div class="sidebar-foot"><p class="eyebrow">Leitidee</p><p class="foot-text">Direkte Instruktion sichert das Fundament. Offene Lernformen gewinnen dadurch erst ihre pädagogische Tragfähigkeit.</p></div></aside>
+  <aside class="sidebar panel" id="sidebar" aria-label="Seiteninhalt"><div class="sidebar-head"><div><p class="eyebrow">Navigation</p><h2>Inhalt</h2></div><button class="icon-button" id="closeSidebar" aria-label="Sidebar schließen">×</button></div><nav><a href="#top" data-section="top"><span>Start</span></a><a href="#idee" data-section="idee"><span>Grundidee</span></a><a href="#saeulen" data-section="saeulen"><span>Fünf Säulen</span></a><a href="#bigdi" data-section="bigdi"><span>Big DI</span></a><a href="#evidenz" data-section="evidenz"><span>Evidenz</span></a><a href="#clt" data-section="clt"><span>Cognitive Load</span></a><a href="#abgrenzung" data-section="abgrenzung"><span>Abgrenzung</span></a><a href="#phasen" data-section="phasen"><span>Sieben Phasen</span></a><a href="#kooperation" data-section="kooperation"><span>Kooperation</span></a><a href="#domaene" data-section="domaene"><span>Domänen</span></a><a href="#fazit" data-section="fazit"><span>Fazit</span></a><a href="#masterprompt" data-section="masterprompt"><span>Planungs-Prompt</span></a><a href="#folien" data-section="folien"><span>Folien</span></a><a href="#impressum" data-section="impressum"><span>Impressum</span></a><a href="#datenschutz" data-section="datenschutz"><span>Datenschutz</span></a></nav><div class="sidebar-foot"><p class="eyebrow">Leitidee</p><p class="foot-text">Direkte Instruktion sichert das Fundament. Offene Lernformen gewinnen dadurch erst ihre pädagogische Tragfähigkeit.</p></div></aside>
   <header class="topbar panel"><div class="brand"><div class="brand-mark">DI</div><div><p class="eyebrow">Unterrichtsarchitektur</p><h1>Direkte Instruktion</h1></div></div><div class="topbar-actions"><button class="nav-toggle" id="openSidebar" aria-label="Inhalt öffnen">☰ Inhalt</button><a class="ghost-button" href="#folien">Folien</a></div></header>
   <main class="container" id="top">
 
@@ -22,17 +250,17 @@
     <p class="lead">Direkte Instruktion ist kein nostalgischer Rückgriff auf autoritären Frontalunterricht. Sie ist eine präzise Unterrichtsarchitektur, die Lernziele offenlegt, kognitive Belastung steuert, Verständnis fortlaufend überprüft und Übung so sequenziert, dass möglichst alle Schülerinnen und Schüler erfolgreich lernen können.</p>
     <p class="lead">Die zugrunde liegende Präsentation deutet Direkte Instruktion als Fundament moderner Lernumgebungen. Agile, kooperative und forschende Formate werden dadurch nicht verdrängt. Sie werden vorbereitet, weil offene Lernformen erst dann produktiv werden, wenn die nötigen fachlichen und kognitiven Werkzeuge verfügbar sind.</p>
     <div class="stats"><div class="stat"><b>d = 0,56 bis 0,60</b><span>Visible Learning: robuste Wirksamkeit Direkter Instruktion</span></div><div class="stat"><b>75.000</b><span>Kinder pro Jahr im Project Follow Through</span></div><div class="stat"><b>7</b><span>Phasen der kognitiven Unterrichtsarchitektur</span></div></div>
-    <div class="hero-actions"><a class="btn primary" href="#idee">Analyse lesen</a><a class="btn" href="#folien">Folien ansehen</a></div>
+    <div class="hero-actions"><a class="btn primary" href="#idee">Analyse lesen</a><a class="btn" href="#masterprompt">KI-Planungs-Prompt</a></div>
   </div>
   <figure class="hero-figure panel"><img src="images/folie_01.jpg" alt="Titelfolie Direkte Instruktion"><figcaption class="caption">Titelfolie: Direkte Instruktion als evidenzbasiertes Fundament moderner, agiler Pädagogik.</figcaption></figure>
 </section>
 
 <section id="idee"><div class="section-head panel"><p class="eyebrow">1. Grundidee</p><h2>Das Paradigma der fehlerfreien Kommunikation</h2><p>Die Direkte Instruktion geht von einer schlichten, aber weitreichenden Annahme aus: Wenn ein Schüler oder eine Schülerin einen Inhalt nicht lernt, wird die Ursache zunächst nicht in mangelnder Begabung, Herkunft oder Motivation gesucht, sondern in der Sequenzierung der Instruktion. Unterricht trägt damit eine hohe Verantwortung. Er muss Lernwege so aufbauen, dass Fehlerquellen minimiert, Zwischenschritte sichtbar und Erfolgserlebnisse systematisch ermöglicht werden.</p></div>
-<div class="grid"><div class="copy panel"><p class="drop">Historisch entsteht dieses Paradigma in den 1960er Jahren im Umfeld von Siegfried Engelmann und dem Projekt DISTAR. Der Ansatz richtet sich ausdrücklich an unterprivilegierte Risikoschülerinnen und Risikoschüler. Das Ziel ist nicht die Optimierung eines ohnehin privilegierten Lernmilieus, sondern der Versuch, den Zusammenhang von Armut, Bildungsscheitern und geringer Selbstwirksamkeit durch präzisen Unterricht zu durchbrechen.</p><p>Der Begriff „fehlerfreie Kommunikation“ meint nicht, dass Lernende keine Fehler machen dürfen. Gemeint ist vielmehr, dass die Instruktion selbst möglichst wenig Mehrdeutigkeit produziert. Lernende sollen nicht raten müssen, was gemeint ist, worauf es ankommt oder wann eine Lösung als hinreichend gilt. Gute Direkte Instruktion reduziert Nebel und erhöht diagnostische Klarheit.</p><div class="quote">Der Fehler wird nicht moralisiert. Er wird als Hinweis gelesen, dass die Instruktion an einer Stelle noch nicht klar genug, zu schnell oder zu wenig überprüft war.</div></div><figure class="slide-img panel"><img src="images/folie_02.jpg" alt="Paradigma der fehlerfreien Kommunikation"><figcaption class="caption">Folie 2 betont die Sequenzierung der Instruktion als zentrale Stellgröße.</figcaption></figure></div></section>
+<div class="grid"><div class="copy panel"><p class="drop">Historisch entsteht dieses Paradigma in den 1960er Jahren im Umfeld von Siegfried Engelmann und dem Projekt DISTAR. Der Ansatz richtet sich ausdrücklich an unterprivilegierte Risikoschülerinnen und Risikoschüler. Das Ziel ist nicht die Optimierung eines ohnehin privilegierten Lernmilieus, sondern der Versuch, den Zusammenhang von Armut, Bildungsscheitern und geringer Selbstwirksamkeit durch präzisen Unterricht zu durchbrechen.</p><p>Der Begriff „fehlerfreie Kommunikation" meint nicht, dass Lernende keine Fehler machen dürfen. Gemeint ist vielmehr, dass die Instruktion selbst möglichst wenig Mehrdeutigkeit produziert. Lernende sollen nicht raten müssen, was gemeint ist, worauf es ankommt oder wann eine Lösung als hinreichend gilt. Gute Direkte Instruktion reduziert Nebel und erhöht diagnostische Klarheit.</p><div class="quote">Der Fehler wird nicht moralisiert. Er wird als Hinweis gelesen, dass die Instruktion an einer Stelle noch nicht klar genug, zu schnell oder zu wenig überprüft war.</div></div><figure class="slide-img panel"><img src="images/folie_02.jpg" alt="Paradigma der fehlerfreien Kommunikation"><figcaption class="caption">Folie 2 betont die Sequenzierung der Instruktion als zentrale Stellgröße.</figcaption></figure></div></section>
 
 <section id="saeulen"><div class="section-head panel"><p class="eyebrow">2. Fünf Säulen</p><h2>Die unverhandelbaren Annahmen des Ansatzes</h2><p>Die Präsentation verdichtet Direkte Instruktion in fünf Säulen. Sie sind bewusst normativ formuliert, weil sie eine klare Gegenposition zu defizitorientierten Erklärungen von Bildungsungleichheit bilden.</p></div><div class="cards"><article class="card"><div class="num">1</div><h3>Alle Kinder können lernen</h3><p>Die Grundannahme ist radikal inklusiv: Lernfähigkeit wird nicht als Privileg der Starken verstanden. Unterricht muss so gestaltet werden, dass auch Lernende mit ungünstigen Startbedingungen Zugang zum Inhalt finden.</p></article><article class="card"><div class="num">2</div><h3>Erfolg erzeugt Selbstwert</h3><p>Nicht ein abstraktes Selbstwerttraining führt zuerst zum Lernen, sondern erlebter fachlicher Erfolg stabilisiert Selbstwirksamkeit. Wer merkt, dass Lernen gelingt, entwickelt Vertrauen in die eigene Kompetenz.</p></article><article class="card"><div class="num">3</div><h3>Unterricht braucht Unterstützung</h3><p>Erfolgreicher Unterricht entsteht nicht durch spontane Genialität der Lehrkraft. Er verlangt systematische Materialien, klare Routinen und professionelle Entlastung.</p></article><article class="card"><div class="num">4</div><h3>Beschleunigung ist nötig</h3><p>Benachteiligte Lernende dürfen nicht nur langsam begleitet werden. Sie brauchen oft ein höheres Lerntempo, damit Rückstände nicht dauerhaft festgeschrieben werden.</p></article><article class="card"><div class="num">5</div><h3>Detailkontrolle verhindert Missverständnisse</h3><p>Kleine Unschärfen in Aufgaben, Begriffen oder Beispielen summieren sich zu großen Lernproblemen. Präzision ist daher keine Kleinlichkeit, sondern eine Frage der Gerechtigkeit.</p></article></div><figure class="slide-img panel" style="position:static"><img src="images/folie_03.jpg" alt="Fünf Säulen der Direkten Instruktion"><figcaption class="caption">Folie 3 stellt die fünf Säulen als tragende Elemente dar.</figcaption></figure></section>
 
-<section id="bigdi"><div class="grid"><div class="copy panel"><p class="eyebrow">3. Big DI</p><h2>Die Mechanik der Exzellenz</h2><p class="drop">Die Präsentation unterscheidet nicht nur einzelne Unterrichtstechniken, sondern beschreibt eine umfassende Mechanik des Kompetenzerwerbs. Zentral ist das Prinzip des Mastery Learning: Der Übergang zum nächsten kumulativen Lernschritt erfolgt erst dann, wenn der vorherige Schritt tatsächlich beherrscht wird.</p><p>Diese Logik widerspricht einem Unterricht, der nach Stoffverteilungsplan voranschreitet, unabhängig davon, ob die Klasse verstanden hat. Direkte Instruktion ersetzt die Frage „Habe ich es erklärt?“ durch die Frage „Ist es gelernt worden?“ Das verschiebt die Aufmerksamkeit vom Lehrvortrag zum nachweisbaren Kompetenzaufbau.</p><p>Geskriptete Unterrichtsmaterialien werden dabei nicht als Entmündigung der Lehrkraft verstanden. Sie entlasten von spontaner Planung, damit die Aufmerksamkeit auf Beobachtung, Rückmeldung und Interaktion gerichtet werden kann. Wenn Materialien empirisch pilotiert sind und früh typische Fehler erfassen, gewinnt die Lehrkraft Zeit für genau die pädagogische Arbeit, die nicht automatisierbar ist.</p></div><figure class="slide-img panel"><img src="images/folie_04.jpg" alt="Mechanik der Exzellenz Big DI"><figcaption class="caption">Folie 4 zeigt Mastery Learning und geskriptete Materialien als Treppenstruktur.</figcaption></figure></div></section>
+<section id="bigdi"><div class="grid"><div class="copy panel"><p class="eyebrow">3. Big DI</p><h2>Die Mechanik der Exzellenz</h2><p class="drop">Die Präsentation unterscheidet nicht nur einzelne Unterrichtstechniken, sondern beschreibt eine umfassende Mechanik des Kompetenzerwerbs. Zentral ist das Prinzip des Mastery Learning: Der Übergang zum nächsten kumulativen Lernschritt erfolgt erst dann, wenn der vorherige Schritt tatsächlich beherrscht wird.</p><p>Diese Logik widerspricht einem Unterricht, der nach Stoffverteilungsplan voranschreitet, unabhängig davon, ob die Klasse verstanden hat. Direkte Instruktion ersetzt die Frage „Habe ich es erklärt?" durch die Frage „Ist es gelernt worden?" Das verschiebt die Aufmerksamkeit vom Lehrvortrag zum nachweisbaren Kompetenzaufbau.</p><p>Geskriptete Unterrichtsmaterialien werden dabei nicht als Entmündigung der Lehrkraft verstanden. Sie entlasten von spontaner Planung, damit die Aufmerksamkeit auf Beobachtung, Rückmeldung und Interaktion gerichtet werden kann. Wenn Materialien empirisch pilotiert sind und früh typische Fehler erfassen, gewinnt die Lehrkraft Zeit für genau die pädagogische Arbeit, die nicht automatisierbar ist.</p></div><figure class="slide-img panel"><img src="images/folie_04.jpg" alt="Mechanik der Exzellenz Big DI"><figcaption class="caption">Folie 4 zeigt Mastery Learning und geskriptete Materialien als Treppenstruktur.</figcaption></figure></div></section>
 
 <section id="evidenz"><div class="section-head panel"><p class="eyebrow">4. Empirische Zäsur</p><h2>Project Follow Through und die globale Validierung</h2><p>Die Präsentation deutet Project Follow Through als empirische Zäsur. Das Programm lief von 1967 bis 1995, war eines der größten bildungspolitischen Experimente überhaupt und verglich 21 Bildungsmodelle mit etwa 75.000 At-Risk-Kindern pro Jahr. Die zentrale Frage lautete, welche pädagogischen Modelle den Teufelskreis aus Armut und Bildungsversagen messbar durchbrechen können.</p></div><div class="grid"><div class="copy panel"><p class="drop">Die Ergebnisse galten als Schock für den pädagogischen Zeitgeist. Direkte Instruktion erreichte in den Bereichen Basic Skills, Cognitive Skills und Affective Skills jeweils Spitzenpositionen. Besonders irritierend war, dass auch Selbstwertgefühl und Kontrollüberzeugung nicht bei den offenen, affektorientierten Modellen am stärksten ausfielen, sondern bei dem Modell, das fachlichen Erfolg am verlässlichsten erzeugte.</p><p>Die Folien verknüpfen diesen historischen Befund mit John Hatties Visible Learning. In der Aggregation von mehr als 1.400 Metaanalysen wird Direkte Instruktion mit einem Effektmaß von etwa d = 0,56 bis 0,60 angegeben. Problemorientiertes Lernen und entdeckendes Lernen bleiben deutlich darunter, vor allem wenn sie zu früh und ohne ausreichende Wissensbasis eingesetzt werden.</p><div class="pill-row"><span class="pill">Basic Skills: Platz 1</span><span class="pill">Cognitive Skills: Platz 1</span><span class="pill">Affective Skills: Platz 1</span><span class="pill">Hattie: über dem Umschlagpunkt d = 0,40</span></div><p>Der didaktische Kern dieser Befunde ist nicht, dass offene Lernformen wertlos wären. Der Kern ist, dass sie Voraussetzungen haben. Wer Problemlösen, Forschung und Transfer will, muss zuerst die fachlichen Schemata aufbauen, mit denen Schülerinnen und Schüler überhaupt sinnvoll Probleme lösen können.</p></div><div><figure class="slide-img panel"><img src="images/folie_05.jpg" alt="Project Follow Through"><figcaption class="caption">Folie 5: Größenordnung und Ziel von Project Follow Through.</figcaption></figure><figure class="slide-img panel" style="margin-top:18px;position:static"><img src="images/folie_07.jpg" alt="Hatties Visible Learning"><figcaption class="caption">Folie 7: Direkte Instruktion im Vergleich zu problemorientiertem und entdeckendem Lernen.</figcaption></figure></div></div></section>
 
@@ -40,13 +268,261 @@
 
 <section id="abgrenzung"><div class="section-head panel"><p class="eyebrow">6. Abgrenzung</p><h2>Direkte Instruktion ist nicht klassischer Frontalunterricht</h2><p>Ein zentrales Missverständnis besteht darin, Direkte Instruktion mit langem Lehrervortrag gleichzusetzen. Die Präsentation trennt diese beiden Formen ausdrücklich. Klassischer Frontalunterricht ist häufig lehrerzentriert, stoffplanorientiert und passiv. Direkte Instruktion ist dagegen lernendenzentriert, weil sie sich am messbaren Verständnis orientiert.</p></div><div class="table-wrap"><table><thead><tr><th>Kriterium</th><th>Direkte Instruktion</th><th>Klassischer Frontalunterricht</th></tr></thead><tbody><tr><td>Steuerung</td><td><strong>Lehrgesteuert, aber konsequent lernendenzentriert.</strong> Das Tempo richtet sich nach Verständnis, nicht nach dem Stoffplan.</td><td>Lehrzentriert. Das Tempo wird oft durch Stofffülle und Unterrichtsplanung diktiert.</td></tr><tr><td>Binnendifferenzierung</td><td><strong>Explizit und dynamisch.</strong> Kleingruppen und gezieltes Üben entstehen aus fortlaufender Diagnose.</td><td>Oft wird die Klasse als homogene Masse behandelt; Unterschiede bleiben verdeckt.</td></tr><tr><td>Feedback-Kultur</td><td><strong>Rückmeldung in Echtzeit.</strong> Aufgabe, Prozess, Regulation und Selbstbild werden während des Lernens adressiert.</td><td>Feedback erfolgt häufig global oder zeitlich verzögert, etwa nach Tests oder Hausaufgaben.</td></tr><tr><td>Kognitive Aktivierung</td><td><strong>Sehr hoch.</strong> Choral Responding, Checks for Understanding und angeleitetes Üben binden alle ein.</td><td>Oft gering, weil längeres Zuhören passives Verhalten begünstigt.</td></tr></tbody></table></div><figure class="slide-img panel" style="position:static;margin-top:20px"><img src="images/folie_09.jpg" alt="Abgrenzung Frontalunterricht und Direkte Instruktion"><figcaption class="caption">Folie 9 grenzt Mythos und Realität voneinander ab; Folie 11 vertieft den Systemvergleich.</figcaption></figure></section>
 
-<section id="phasen"><div class="section-head panel"><p class="eyebrow">7. Unterrichtsarchitektur</p><h2>Die sieben Phasen der kognitiven Architektur</h2><p>Die Präsentation beschreibt Direkte Instruktion als Abfolge von sieben Phasen. Diese Phasen sind keine starre Choreografie, sondern eine kognitive Bauordnung: Zielklarheit, Erfolgskriterien, Aktivierung, Modellierung, geführtes Üben, Konsolidierung und Transfer.</p></div><div class="grid"><div class="timeline"><article class="phase"><div class="step">1</div><div><h3>Klare Lernintention</h3><p>Die Ziele werden unmissverständlich offengelegt. Schülerinnen und Schüler wissen, was sie am Ende können sollen und woran der Erfolg erkennbar wird.</p></div></article><article class="phase"><div class="step">2</div><div><h3>Erfolgskriterien</h3><p>Erfolgskriterien verhindern Rätselraten. Sie übersetzen das Lernziel in beobachtbare Merkmale einer guten Leistung.</p></div></article><article class="phase"><div class="step">3</div><div><h3>Engagement</h3><p>Commitment und Hook richten Aufmerksamkeit aus. Die Lernenden verstehen, warum die Aufgabe relevant ist.</p></div></article><article class="phase"><div class="step">4</div><div><h3>Unterrichtsaufbau</h3><p>Die Lehrkraft modelliert den Denkweg. Sie zeigt nicht nur Ergebnisse, sondern macht kognitive Zwischenschritte sichtbar.</p></div></article><article class="phase"><div class="step">5</div><div><h3>Angeleitetes Üben</h3><p>Die We-do-Phase ist das dynamische Herzstück. Ständiges Scaffolding und Korrektur verhindern die Verfestigung falscher Muster.</p></div></article><article class="phase"><div class="step">6</div><div><h3>Abschluss</h3><p>Der neue Inhalt wird konsolidiert und in ein kognitives Netz eingebunden.</p></div></article><article class="phase"><div class="step">7</div><div><h3>Unabhängiges Üben</h3><p>Die You-do-Phase dient Transfer und Automatisierung. Sie beginnt erst, wenn die Voraussetzungen gesichert sind.</p></div></article></div><figure class="slide-img panel"><img src="images/folie_10.jpg" alt="Die 7 Phasen der kognitiven Architektur"><figcaption class="caption">Folie 10 visualisiert die sieben Phasen als architektonische Sequenz.</figcaption></figure></div></section>
+<section id="phasen"><div class="section-head panel"><p class="eyebrow">7. Unterrichtsarchitektur</p><h2>Die sieben Phasen der kognitiven Architektur</h2><p>Die Präsentation beschreibt Direkte Instruktion als Abfolge von sieben Phasen. Diese Phasen sind keine starre Choreografie, sondern eine kognitive Bauordnung: Zielklarheit, Erfolgskriterien, Aktivierung, Modellierung, geführtes Üben, Konsolidierung und Transfer.</p></div><div class="grid"><div class="timeline"><article class="phase"><div class="step">1</div><div><h3>Klare Lernintention</h3><p>Die Ziele werden unmissverständlich offengelegt. Schülerinnen und Schüler wissen, was sie am Ende können sollen und woran der Erfolg erkennbar wird.</p></div></article><article class="phase"><div class="step">2</div><div><h3>Erfolgskriterien</h3><p>Erfolgskriterien verhindern Rätselraten. Sie übersetzen das Lernziel in beobachtbare Merkmale einer guten Leistung.</p></div></article><article class="phase"><div class="step">3</div><div><h3>Engagement</h3><p>Commitment und Hook richten Aufmerksamkeit aus. Die Lernenden verstehen, warum die Aufgabe relevant ist.</p></div></article><article class="phase"><div class="step">4</div><div><h3>Unterrichtsaufbau</h3><p>Die Lehrkraft modelliert den Denkweg. Sie zeigt nicht nur Ergebnisse, sondern macht kognitive Zwischenschritte sichtbar.</p></article><article class="phase"><div class="step">5</div><div><h3>Angeleitetes Üben</h3><p>Die We-do-Phase ist das dynamische Herzstück. Ständiges Scaffolding und Korrektur verhindern die Verfestigung falscher Muster.</p></div></article><article class="phase"><div class="step">6</div><div><h3>Abschluss</h3><p>Der neue Inhalt wird konsolidiert und in ein kognitives Netz eingebunden.</p></div></article><article class="phase"><div class="step">7</div><div><h3>Unabhängiges Üben</h3><p>Die You-do-Phase dient Transfer und Automatisierung. Sie beginnt erst, wenn die Voraussetzungen gesichert sind.</p></div></article></div><figure class="slide-img panel"><img src="images/folie_10.jpg" alt="Die 7 Phasen der kognitiven Architektur"><figcaption class="caption">Folie 10 visualisiert die sieben Phasen als architektonische Sequenz.</figcaption></figure></div></section>
 
 <section id="kooperation"><div class="grid"><div class="copy panel"><p class="eyebrow">8. Synergie mit Kooperation</p><h2>Kooperative Arbeitsphasen sind keine Gegenspieler</h2><p class="drop">Direkte Instruktion und kooperatives Lernen sind keine Antagonisten. Der Gegensatz entsteht nur, wenn man Direkte Instruktion fälschlich als Dauerinput versteht oder kooperatives Lernen fälschlich als ungesteuerte Gruppenarbeit. In einer modernen Unterrichtsarchitektur haben beide ihren Ort.</p><p>Think-Pair-Share eignet sich besonders zur Vorwissensaktivierung. Die kurze Einzeldenkphase verhindert, dass nur die schnellsten Schülerinnen und Schüler den Prozess dominieren. Die Partnerphase erzeugt sprachliche Durcharbeitung, bevor Beiträge in die Klasse gehen.</p><p>Reciprocal Teaching ist wirksam, weil Lernende Lösungswege laut verbalisieren. Dadurch wird illusorisches Verständnis schnell sichtbar. Wer glaubt, etwas verstanden zu haben, merkt beim Erklären oft, welche Lücke noch besteht.</p><p>Fading und Coaching beschreiben den Übergang in Autonomie. Während der We-do-Phase zirkuliert die Lehrkraft als Coach. Sie zieht Unterstützung nicht abrupt zurück, sondern reduziert sie, sobald die Lernenden tragfähige Routinen zeigen.</p></div><figure class="slide-img panel"><img src="images/folie_12.jpg" alt="Kooperative Arbeitsphasen"><figcaption class="caption">Folie 12 beschreibt Kooperation als organischen Bestandteil Direkter Instruktion.</figcaption></figure></div></section>
 
 <section id="domaene"><div class="grid"><div class="copy panel"><p class="eyebrow">9. Domänenspezifische Unerlässlichkeit</p><h2>Wo Direkte Instruktion besonders nötig ist</h2><p class="drop">Direkte Instruktion ist nicht in jeder Situation gleich wichtig. Besonders unverzichtbar wird sie in hierarchischen Fächern wie Mathematik, Schriftspracherwerb und vielen Bereichen der Naturwissenschaften. Dort bauen Konzepte kumulativ aufeinander auf. Wer eine Basisoperation nicht beherrscht, scheitert später an komplexeren Problemen, obwohl die eigentliche Schwierigkeit viel früher entstanden ist.</p><p>Auch frühe Phasen des Wissenserwerbs verlangen explizite Führung. Bevor Novizen komplexe Probleme lösen können, müssen sie die kognitiven Werkzeuge automatisieren. Andernfalls wird Problemlösen zur bloßen Suchbewegung.</p><p>Schließlich ist Direkte Instruktion eine Frage der Chancengleichheit. Offene Lernformen setzen häufig elitäres Vorwissen und ausgeprägte Metakognition voraus. Direkte Instruktion kann At-Risk-Schülerinnen und -Schüler durch Pre-Teaching auffangen, bevor Frustration entsteht.</p></div><figure class="slide-img panel"><img src="images/folie_13.jpg" alt="Domänenspezifische Unerlässlichkeit"><figcaption class="caption">Folie 13 nennt Mathematik, Schriftspracherwerb, frühe Wissensphasen und Chancengleichheit.</figcaption></figure></div></section>
 
 <section id="fazit"><div class="grid"><div class="copy panel"><p class="eyebrow">10. Fazit</p><h2>Das didaktische Rückgrat moderner Lernumgebungen</h2><p class="drop">Die Präsentation endet mit einer pointierten These: Forschendes Lernen ist das ultimative Ziel. Direkte Instruktion ist der Weg dorthin. Diese Formulierung ist didaktisch wichtig, weil sie den falschen Gegensatz zwischen Instruktion und Offenheit auflöst.</p><p>Direkte Instruktion ist das konstruktive Alignment der frühen Lernphase. Sie zwingt zur analytischen Durchdringung des Fachs: Was genau sollen Schülerinnen und Schüler können? Welche Teilschritte sind nötig? Woran erkenne ich Erfolg? Wo entstehen typische Fehlkonzepte? Erst wenn diese Fragen beantwortet sind, kann offene Arbeit mehr sein als eine ästhetisch ansprechende Überforderung.</p><p>Im offenen Unterricht bleibt die Lehrkraft zudem nicht passiv. Sie wird zum Dirigenten einer anspruchsvollen Lernumgebung: Sie setzt kurze, hochkonzentrierte Instruktionsphasen, wenn Gruppen an Grenzen stoßen, sie diagnostiziert Fehlkonzepte und sie schließt Kompetenzlücken gezielt. Ohne ein felsenfestes Fundament kollabiert jede offene Lernumgebung.</p><div class="quote">Direkte Instruktion ist kein Relikt einer autoritären Vergangenheit, sondern die Speerspitze einer modernen, evidenzbasierten Pädagogik.</div></div><div><figure class="slide-img panel"><img src="images/folie_14.jpg" alt="Das didaktische Rückgrat moderner Lernumgebungen"><figcaption class="caption">Folie 14: Direkte Instruktion als Weg zum forschenden Lernen.</figcaption></figure><figure class="slide-img panel" style="margin-top:18px;position:static"><img src="images/folie_15.jpg" alt="Fundament der Schule von morgen"><figcaption class="caption">Folie 15: Das Fundament der Schule von morgen.</figcaption></figure></div></div></section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     NEUE SEKTION: KI-PLANUNGS-PROMPT
+     ══════════════════════════════════════════════════════════ -->
+<section id="masterprompt">
+  <div class="section-head panel">
+    <p class="eyebrow">11. Unterrichtsplanung mit KI</p>
+    <h2>Masterprompt: Direkte-Instruktions-Einheit planen und als LaTeX-Dokument ausgeben</h2>
+    <p>Dieser Prompt ist für <strong>Claude (Anthropic)</strong> optimiert und kann direkt in <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> eingefügt werden. Er initiiert einen strukturierten Dialog, in dem Fach, Thema und Jahrgangsstufe erfragt werden. Am Ende erzeugt Claude vollständigen LaTeX-Code für ein druckfertiges Unterrichtsdokument mit Lehrerhinweisen, Tafelbildern und nach Phasen gegliederten Schülerarbeitsblättern.</p>
+  </div>
+
+  <div class="mp-wrapper">
+
+    <!-- Ablauf-Übersicht -->
+    <div class="mp-meta">
+      <span class="mp-badge"><span class="dot"></span>Claude (Anthropic) · claude.ai</span>
+      <span class="mp-hint">Empfehlung: <strong>Claude Sonnet</strong> oder <strong>Claude Opus</strong> für beste LaTeX-Qualität</span>
+    </div>
+
+    <div class="mp-steps">
+      <div class="mp-step">
+        <div class="sn">Schritt 1</div>
+        <p>Prompt vollständig kopieren und in Claude einfügen</p>
+      </div>
+      <div class="mp-step">
+        <div class="sn">Schritt 2</div>
+        <p>Claude fragt nach Fach, Thema und Jahrgangsstufe</p>
+      </div>
+      <div class="mp-step">
+        <div class="sn">Schritt 3</div>
+        <p>Kurze didaktische Diskussion und Feinabstimmung</p>
+      </div>
+      <div class="mp-step">
+        <div class="sn">Schritt 4</div>
+        <p>Claude liefert vollständigen, kompilierbaren LaTeX-Code</p>
+      </div>
+      <div class="mp-step">
+        <div class="sn">Schritt 5</div>
+        <p>PDF mit pdflatex erzeugen, Schülerblätter separat drucken</p>
+      </div>
+    </div>
+
+    <!-- Der eigentliche kopierbare Prompt -->
+    <div class="mp-box-wrap">
+      <pre class="mp-prompt" id="masterPromptText">
+<span class="cmt"># MASTERPROMPT: Unterrichtsplanung – Direkte Instruktion → LaTeX-Dokument
+# Optimiert für Claude (Anthropic). Einfach vollständig einfügen und absenden.</span>
+
+<span class="kw">Du bist ein erfahrener Fachdidaktiker</span> mit tiefer Kenntnis der Direkten Instruktion
+(nach Engelmann, Rosenshine und der Cognitive Load Theory). Deine Aufgabe ist es,
+mich durch die Planung einer konkreten Unterrichtseinheit zu führen und am Ende
+einen vollständigen, kompilierbaren LaTeX-Code zu liefern.
+
+<span class="sec">═══ PHASE 1: Klärung des Kontexts ═══</span>
+
+Stelle mir <span class="kw">nacheinander</span> (nicht alle auf einmal) folgende Fragen und warte
+jeweils auf meine Antwort, bevor du weitergehst:
+
+<span class="str">1.</span> In welchem <span class="kw">Fach</span> soll die Unterrichtseinheit stattfinden?
+   (z. B. Physik, Chemie, Mathematik, Biologie, Deutsch, Geschichte …)
+
+<span class="str">2.</span> Welches <span class="kw">Thema</span> oder welchen Kompetenzbereich willst du behandeln?
+   (So konkret wie möglich, z. B. „Induktionsgesetz – Lenzsche Regel" oder
+   „Schriftliches Multiplizieren zweistelliger Zahlen")
+
+<span class="str">3.</span> Für welche <span class="kw">Jahrgangsstufe</span> und welchen <span class="kw">Kurstyp</span> planst du?
+   (z. B. Klasse 9 Realschule, Q1 Leistungskurs, EF Grundkurs)
+
+<span class="str">4.</span> Wie viele <span class="kw">Unterrichtsstunden</span> soll die Einheit umfassen, und wie lang
+   ist eine Stunde? (z. B. 2 × 45 min oder 1 × 90 min)
+
+<span class="str">5.</span> Gibt es besondere <span class="kw">Rahmenbedingungen</span>, die ich berücksichtigen soll?
+   (z. B. kein Experiment möglich, Lerngruppe mit hohem Förderbedarf,
+   bereits bekannte Vorkenntnisse, Klausur danach, …)
+   → Falls keine, antworte einfach „keine".
+
+<span class="sec">═══ PHASE 2: Didaktische Diskussion ═══</span>
+
+Nachdem ich alle fünf Fragen beantwortet habe, entwickelst du gemeinsam mit mir
+einen kurzen <span class="kw">didaktischen Kommentar</span> (ca. 8–12 Sätze), der folgendes klärt:
+
+<span class="str">a)</span> Welche <span class="kw">Vorwissensanker</span> und kognitiven Schemata müssen aktiviert werden?
+<span class="str">b)</span> Wo liegen die typischen <span class="kw">Fehlkonzepte</span> und Stolperstellen?
+<span class="str">c)</span> Wie wird die <span class="kw">7-Phasen-Architektur</span> der Direkten Instruktion
+   (Lernintention → Erfolgskriterien → Hook → Modellierung → We-do →
+   Konsolidierung → You-do) auf dieses Thema angewendet?
+<span class="str">d)</span> Welche <span class="kw">Differenzierungsmaßnahmen</span> sind sinnvoll?
+
+Schließe die Diskussion mit einer kurzen <span class="kw">Rückfrage</span> ab:
+„Möchtest du etwas an diesem Aufbau ändern, bevor ich den LaTeX-Code erzeuge?"
+
+Warte auf mein „okay" oder meine Korrekturen.
+
+<span class="sec">═══ PHASE 3: LaTeX-Ausgabe ═══</span>
+
+Erzeuge nach meiner Bestätigung einen <span class="kw">vollständigen, fehlerfreien LaTeX-Code</span>
+mit pdflatex kompilierbar (kein XeLaTeX, kein LuaLaTeX erforderlich).
+
+<span class="kw">Paketliste (zwingend):</span>
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{helvet}          % Serifenlose Grundschrift
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{geometry}        % Seitenränder
+\usepackage{tcolorbox}       % farbige Boxen
+\usepackage{array, booktabs} % Tabellen
+\usepackage{enumitem}        % Listen
+\usepackage{fancyhdr}        % Kopf- und Fußzeile
+\usepackage{graphicx}        % Grafiken (optional)
+\usepackage{amssymb, amsmath}% Mathematik
+\usepackage{siunitx}         % SI-Einheiten
+\usepackage{tikz}            % Tafelbilder als TikZ-Diagramme
+\usepackage[hidelinks]{hyperref}
+
+<span class="kw">Dokumentstruktur:</span>
+
+Das LaTeX-Dokument enthält <span class="str">zwei logische Teile</span>, die beide in einer einzigen
+.tex-Datei stehen, aber so aufgebaut sind, dass jeder Teil
+<span class="kw">separat gedruckt</span> werden kann:
+
+<span class="str">━━ TEIL A: Lehrerhandreichung ━━</span>
+
+  • Deckblatt mit Fach, Thema, Jahrgangsstufe, Datum (Platzhalter)
+  • Lernziele (als tcolorbox, blau)
+  • Erfolgskriterien (als Checkliste)
+  • Tabellarische Phasenübersicht der 7 Phasen mit Zeitangaben,
+    Lehreraktion, Schüleraktion und Sozialform
+  • Hinweise zu typischen Fehlkonzepten (als tcolorbox, orange/gelb)
+  • Differenzierungshinweise
+  • Mindestens <span class="kw">ein ausgearbeitetes TikZ-Tafelbild</span> (sauber beschriftet,
+    thematisch passend, mit Kommentaren im Code)
+  • Literatur-/Quellenhinweise (optional, als Fußnote oder Anhang)
+
+<span class="str">━━ TEIL B: Schülerunterlagen ━━</span>
+
+Dieser Teil beginnt mit <span class="kw">\newpage</span> und einem klaren Trennkommentar im
+LaTeX-Code:
+<span class="cmt">  %% =========================================================
+  %%  SCHÜLERUNTERLAGEN – ab hier separat druckbar (ab Seite X)
+  %% =========================================================</span>
+
+  Der Teil enthält:
+
+  <span class="str">B1 – Instruktionsbegleiter (We-do)</span>
+     Strukturiertes Arbeitsblatt, das Schülerinnen und Schüler
+     während der gelenkten Erarbeitungsphase ausfüllen:
+     Lückentext, Skizzen zum Beschriften, geleitete Beweisschritte
+     oder Rechenwege mit Platzhaltern.
+     → Kopfzeile mit Name, Klasse, Datum
+     → Feld für Lernziel (von Schüler selbst einzutragen)
+
+  <span class="str">B2 – Übungsaufgaben (You-do)</span>
+     Mindestens <span class="kw">6 gestufte Aufgaben</span>:
+     – 2 Basisaufgaben (direkte Anwendung des Gelernten)
+     – 2 Transferaufgaben (leicht variierter Kontext)
+     – 2 Vertiefungsaufgaben (anspruchsvoll, offen, kreativ)
+     Jede Aufgabe mit Punktzahl und Platz für den Lösungsweg.
+     Passende Formeln/Hilfsmittel als kleine Infobox am Rand.
+
+  <span class="str">B3 – Selbstevaluationsbogen</span>
+     Kurze Tabelle: Ich kann … / noch nicht / mit Hilfe / sicher
+     (5–7 Zeilen, passend zu den Erfolgskriterien aus Teil A)
+
+<span class="kw">Formatierungsregeln:</span>
+  • Seitenränder: top=2cm, bottom=2cm, left=2.5cm, right=2cm
+  • Kopfzeile (fancyhdr): Fach | Thema | Jahrgangsstufe
+  • Fußzeile: Seitenzahl zentriert
+  • Schriftgröße: 11pt Grundtext, 9pt in Tabellen
+  • Vektoren und physikalische Größen korrekt gesetzt:
+    \vec{F}, \vec{B}, \vec{v} usw.
+  • SI-Einheiten konsequent mit siunitx: \SI{9{,}81}{\meter\per\second\squared}
+  • Keine doppelten Gleichheitszeichen pro Zeile
+  • Verbzusammensetzungen mit Bindestrich: Coulomb-Kraft, Lorentz-Kraft
+  • Deutsch: korrekte Umlaute (ä, ö, ü, ß), keine Ersatzschreibweisen
+
+<span class="kw">Ausgabe:</span>
+Gib den vollständigen LaTeX-Code als einzigen Codeblock aus
+(```latex … ```), sodass er direkt in eine .tex-Datei kopiert
+und mit pdflatex kompiliert werden kann.
+Füge am Anfang des Codes einen Kommentarblock ein:
+
+<span class="cmt">  %% Erzeugt mit Claude (Anthropic) · Masterprompt Direkte Instruktion
+  %% Fach: [FACH] | Thema: [THEMA] | Stufe: [STUFE]
+  %% Kompilieren: pdflatex dateiname.tex (2×)
+  %% Schülerunterlagen (Teil B) beginnen auf Seite [X] – ab dort separat drucken</span>
+
+<span class="sec">═══ STARTE JETZT ═══</span>
+
+Beginne mit <span class="kw">Frage 1</span> aus Phase 1.
+</pre>
+      <button class="mp-copy-btn" id="copyBtn" onclick="copyPrompt()">Kopieren</button>
+    </div>
+
+    <!-- Wo kann ich den Prompt nutzen -->
+    <div class="mp-where">
+      <span>Direkt öffnen in:</span>
+      <a class="mp-link" href="https://claude.ai/new" target="_blank" rel="noopener">
+        <span class="arrow">↗</span> claude.ai (Empfehlung)
+      </a>
+      <a class="mp-link" href="https://chatgpt.com/" target="_blank" rel="noopener">
+        <span class="arrow">↗</span> ChatGPT (alternativ)
+      </a>
+      <a class="mp-link" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <span class="arrow">↗</span> Gemini (alternativ)
+      </a>
+    </div>
+
+    <!-- Ergebnis-Hinweis -->
+    <div class="mp-result-hint">
+      <div class="icon">📄</div>
+      <div>
+        <h4>Was du am Ende erhältst</h4>
+        <p>Claude liefert einen vollständigen <strong>LaTeX-Quellcode</strong> (ein einziger Codeblock, direkt kopierbar). Die Datei enthält <strong>Teil A (Lehrerhandreichung)</strong> mit Phasenplan, Tafelbild als TikZ-Grafik und Hinweisen zu Fehlkonzepten sowie <strong>Teil B (Schülerunterlagen)</strong>, der ab einer definierten Seite separat ausgedruckt werden kann. Kompiliere mit <code>pdflatex dateiname.tex</code> (zweimal für korrekte Seitenzahlen).</p>
+        <div class="mp-latex-preview">
+<span class="lx-cmt">%% Erzeugt mit Claude · Masterprompt Direkte Instruktion
+%% Fach: Physik | Thema: Induktionsgesetz | Stufe: Q1 LK
+%% Kompilieren: pdflatex di_einheit.tex (2×)</span>
+
+<span class="lx-kw">\documentclass</span><span class="lx-arg">[11pt,a4paper]</span>{article}
+<span class="lx-kw">\usepackage</span><span class="lx-arg">[T1]</span>{fontenc}  <span class="lx-cmt">% Zeichenkodierung</span>
+<span class="lx-kw">\usepackage</span><span class="lx-arg">[utf8]</span>{inputenc}
+<span class="lx-kw">\usepackage</span>{tcolorbox, tikz, siunitx, fancyhdr …}
+
+<span class="lx-env">\begin</span>{document}
+<span class="lx-cmt">%% ── TEIL A: Lehrerhandreichung ──────────────────────</span>
+…
+
+<span class="lx-cmt">%% =========================================================
+%%  SCHÜLERUNTERLAGEN – ab hier separat druckbar (ab Seite 5)
+%% =========================================================</span>
+<span class="lx-kw">\newpage</span>
+<span class="lx-cmt">%% ── TEIL B1: Instruktionsbegleiter (We-do) ──────────</span>
+…
+<span class="lx-cmt">%% ── TEIL B2: Übungsaufgaben (You-do) ────────────────</span>
+…
+<span class="lx-cmt">%% ── TEIL B3: Selbstevaluationsbogen ─────────────────</span>
+…
+<span class="lx-env">\end</span>{document}
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.mp-wrapper -->
+</section>
+<!-- ══ Ende Masterprompt-Sektion ══ -->
+
 
 <section id="folien"><div class="section-head panel"><p class="eyebrow">Anhang</p><h2>Die 15 Folien als Bildgalerie</h2><p>Die Originalfolien sind als Bildmaterial eingebunden. Ein Klick öffnet die jeweilige Folie vergrößert. So kann die Webseite als eigenständige Vertiefung oder als Begleitseite zu einer Präsentation genutzt werden.</p></div><div class="gallery">
 <button class="thumb" data-full="images/folie_01.jpg"><img src="images/folie_01.jpg" alt="Folie 1"><span>Folie 1</span></button>
@@ -117,5 +593,41 @@
   <div><p class="eyebrow">Kurz</p><p class="foot-text">Direkte Instruktion wird hier als kognitionspsychologisch fundiertes Fundament moderner Lernumgebungen verstanden. Offene und agile Lernformen werden dadurch nicht ersetzt, sondern didaktisch vorbereitet.</p></div>
 </footer>
   </main>
-  <div class="lightbox" id="lightbox" aria-hidden="true"><button class="close" id="close">Schließen</button><img id="lightboxImg" src="" alt="Vergrößerte Folie"></div><div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div><script src="script.js"></script>
-</body></html>
+  <div class="lightbox" id="lightbox" aria-hidden="true"><button class="close" id="close">Schließen</button><img id="lightboxImg" src="" alt="Vergrößerte Folie"></div>
+  <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+  <script>
+  // ── Kopierfunktion für den Masterprompt ──────────────────────────
+  function copyPrompt() {
+    const pre = document.getElementById('masterPromptText');
+    // Reinen Text ohne HTML-Tags extrahieren
+    const text = pre.innerText || pre.textContent;
+    navigator.clipboard.writeText(text.trim()).then(function() {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Kopiert!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Kopieren';
+        btn.classList.remove('copied');
+      }, 2200);
+    }).catch(function() {
+      // Fallback für ältere Browser
+      const range = document.createRange();
+      range.selectNode(pre);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Kopiert!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Kopieren';
+        btn.classList.remove('copied');
+      }, 2200);
+    });
+  }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
